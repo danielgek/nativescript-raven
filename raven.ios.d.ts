@@ -1,3 +1,4 @@
 import { Common } from './raven.common';
-export declare class Raven extends Common {
+export declare class RavenNative extends Common {
+    static init(dsn: string): void;
 }
