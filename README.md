@@ -18,7 +18,9 @@ RavenNative.init(dns);
 ```
 **NOTE:** if you are using **Angular** on top of Nativescript add the init to **main.ts** instead
  
- ## API
+**NOTE** In android Raven saves exeption on this and send it latter(usualy when app reopens), this needs some ajustments
+
+## API
 Inits Raven
  `Raven.init(dsn: string);`
 
