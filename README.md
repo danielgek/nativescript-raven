@@ -1,5 +1,7 @@
 # Nativescript Raven
 This plugin uses raven-android and raven-cocoa to catch native errors/stack traces
+
+#### this plugin is in alpha
 ## Getting started
 
 #### Instalation
