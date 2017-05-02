@@ -34,4 +34,15 @@ export class RavenNative extends Common {
             console.error('[RavenNative - Android] Exeption on init: ', e);
         }
     }
+
+    /**
+     * capture
+     */
+    public static capture(error: any) {
+        try {
+            com.getsentry.raven.android.Raven.capture(JSON.stringify(error));
+        } catch (error) {
+            console.error('[RavenNative - Android] Exeption on capture: ', error);
+        }
+    }
 }
