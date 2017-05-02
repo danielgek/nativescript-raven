@@ -21,8 +21,8 @@ RavenNative.init(dns);
 **NOTE** In android Raven saves exeption on this and send it latter(usualy when app reopens), this needs some ajustments
 
 ## API
-Inits Raven
- `Raven.init(dsn: string);`
+Init Raven
+`Raven.init(dsn: string);`
 
 
 

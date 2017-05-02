@@ -2,11 +2,11 @@ import {Common} from './raven.common';
 import * as application from 'application';
 import { RavenNativeAppDelegate } from './raven.appdelegate';
 
-declare var SentryClient: any;
+declare var SentryClient, SentrySeverity, SentryEvent : any;
 
 export class RavenNative extends Common {
 
-    static init(dsn: string) {
+    public static init(dsn: string) {
 
         try {
             if(application.ios){
@@ -14,8 +14,8 @@ export class RavenNative extends Common {
                 application.ios.delegate = RavenNativeAppDelegate;
             }
 
-        } catch(e){
-            console.error('[iOS] Exeption on RavenNative init: ', e);
+        } catch(error){
+            console.error('[RavenNative - iOS] Exeption on init: ', error);
         }
     }
 }
