@@ -455,5 +455,6 @@ declare class UserFeedbackTableViewController extends UITableViewController impl
 	textFieldShouldEndEditing(textField: UITextField): boolean;
 
 	textFieldShouldReturn(textField: UITextField): boolean;
+}
 
 ```
