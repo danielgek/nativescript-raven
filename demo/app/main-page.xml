@@ -1,6 +1,6 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page">
   <StackLayout class="p-20">
-    <Label text="TestButton" class="t-20 text-center c-black" textWrap="true"/>
-    <Button tap="onTap" text="throw" />
+    <Button tap="onTapMain" text="Main thread exeption" />
+    <Button tap="onTapTry" text="Inside of try trow test" />
   </StackLayout>
 </Page>

@@ -2,17 +2,17 @@
   "nativescript": {
     "id": "org.nativescript.demo",
     "tns-ios": {
-      "version": "2.5.0"
+      "version": "3.0.1"
     },
     "tns-android": {
-      "version": "2.5.0"
+      "version": "3.0.1"
     }
   },
   "dependencies": {
     "nativescript-raven": "file:///Users/danielgek/spms/nativescript-raven",
-    "nativescript-theme-core": "^1.0.3",
+    "nativescript-theme-core": "^1.0.4",
     "nativescript-unit-test-runner": "^0.3.4",
-    "tns-core-modules": "^2.5.2"
+    "tns-core-modules": "^3.0.1"
   },
   "devDependencies": {
     "babel-traverse": "6.12.0",
@@ -25,6 +25,6 @@
     "karma-nativescript-launcher": "^0.4.0",
     "lazy": "1.0.11",
     "nativescript-dev-typescript": "^0.4.2",
-    "typescript": "^2.1.6"
+    "typescript": "^2.3.4"
   }
 }

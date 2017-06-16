@@ -1,30 +1,31 @@
 import { Common } from './raven.common';
 import * as application from 'application';
+import * as utils from 'utils/utils';
 
 
-declare var com: any;
+declare var com: any, io: any;
 
 export class RavenNative extends Common {
 
     public static init(dsn: string) {
 
         try {
-            if(application.android){
+            if(application.android) {
 
-                application.android.on(application.launchEvent, (activityEventData)=> {
-                    com.getsentry.raven.android.Raven.init(activityEventData.activity.getApplicationContext(), dsn);
+                application.android.on('activityStarted', (activityEventData)=> {
+                    io.sentry.Sentry.init(dsn, new io.sentry.android.AndroidSentryClientFactory(utils.ad.getApplicationContext()));
                 });
 
                 application.on(application.uncaughtErrorEvent, args => {
                     
                     if (!args.android) {
-                        com.getsentry.raven.android.Raven.capture(JSON.stringify(args));
+                        io.sentry.Sentry.capture(JSON.stringify(args));
                     } else {
-                        com.getsentry.raven.android.Raven.capture(args.android);
-                        let eventBuilder = new com.getsentry.raven.event.EventBuilder()
-                              .withMessage(JSON.stringify(args.android))
-                              .withLevel(com.getsentry.raven.event.Event.Level.ERROR);
-                        com.getsentry.raven.android.Raven.capture(eventBuilder.build());
+                        let event = new io.sentry.event.EventBuilder()
+                              .withMessage(JSON.stringify(args.android.stackTrace))
+                              .withLevel(io.sentry.event.Event.Level.FATAL);
+
+                        io.sentry.Sentry.capture(event.build());
                     }
                 });
 
@@ -40,7 +41,11 @@ export class RavenNative extends Common {
      */
     public static capture(error: any) {
         try {
-            com.getsentry.raven.android.Raven.capture(JSON.stringify(error));
+            let event = new io.sentry.event.EventBuilder()
+                .withMessage(JSON.stringify(error))
+                .withLevel(io.sentry.event.Event.Level.ERROR);
+
+            io.sentry.Sentry.capture(event.build());
         } catch (error) {
             console.error('[RavenNative - Android] Exeption on capture: ', error);
         }

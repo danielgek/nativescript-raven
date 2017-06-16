@@ -1,4 +1,4 @@
-import {Common} from './raven.common';
+import { Common } from './raven.common';
 import * as application from 'application';
 import { RavenNativeAppDelegate } from './raven.appdelegate';
 
@@ -10,7 +10,7 @@ export class RavenNative extends Common {
 
         try {
             if(application.ios){
-                SentryClient.shared = new SentryClient(dsn);
+                SentryClient.sharedClient = SentryClient.alloc().initWithDsnDidFailWithError(dsn);
                 application.ios.delegate = RavenNativeAppDelegate;
             }
 
@@ -22,39 +22,14 @@ export class RavenNative extends Common {
     
     public static capture(error: any) {
         try {
-            // let event = Event.build("TEST 1 2 3") {
-            //     $0.level = .Debug
-            //     $0.tags = ["context": "production"]
-            //     $0.extra = [
-            //         "my_key": 1,
-            //         "some_other_value": "foo bar"
-            //     ]
-            // }
-
-            let event = new SentryEvent({
-                level: SentrySeverity.Error,
-                tags: NSDictionary.dictionaryWithDictionary(<any>{
-                    'context': 'production'
-                }),
-                extra: NSDictionary.dictionaryWithDictionary(<any>{
-                    'my_key': 1,
-                    'some_other_value': 'foo bar'
-                }),
-                message: JSON.stringify(error),
-                timestamp: null,  
-                logger: null,
-                culprit: null, 
-                serverName: null, 
-                release: null, 
-                buildNumber: null,
-                modules: null,
-                fingerprint: null, 
-                user: null, 
-                exceptions: null,
-                stacktrace: null,
+            let event = new SentryEvent({ level: SentrySeverity.Error }); //if this fails try SentryEvent.alloc()
+            event.message = error;
+            
+            SentryClient.sharedClient.sendEventWithCompletionHandler(event, function(error) {
+                if (error) {
+                    console.error('[RavenNative - iOS] Exeption on capture: ', error);
+                }
             });
-
-            SentryClient.shared().captureEvent(event)
 
         } catch (error) {
             console.error('[RavenNative - iOS] Exeption on capture: ', error);

@@ -8,8 +8,8 @@ export class RavenNativeAppDelegate extends UIResponder implements UIApplication
     public static ObjCProtocols = [UIApplicationDelegate];
 
     public applicationDidFinishLaunchingWithOptions(application: UIApplication, launchOptions: NSDictionary<any, any>): boolean {
-        if(SentryClient.shared) {
-            SentryClient.shared.startCrashHandler();
+        if (SentryClient.sharedClient) {
+            SentryClient.sharedClient.startCrashHandlerWithError();
         }else{
             console.error('[iOS] No SentryClient.shared instance found!');
         }
