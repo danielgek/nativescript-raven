@@ -26,12 +26,6 @@
     "type": "git",
     "url": "https://github.com/danielgek/nativescript-raven.git"
   },
-  "keywords": [
-    "NativeScript",
-    "JavaScript",
-    "Android",
-    "iOS"
-  ],
   "author": {
     "name": "Daniel Leal",
     "email": "danielgek@gmail.com"
